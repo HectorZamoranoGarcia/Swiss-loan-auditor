@@ -10,7 +10,7 @@ import javafx.scene.control.TableView;
 
 public class AuditController {
 
-    //Interface Elements
+    // Interface Elements
     @FXML
     private TableView<?> auditTable; // Table
     @FXML
@@ -37,7 +37,7 @@ public class AuditController {
     // Button Action Handler
     @FXML
     void handleRunAudit(ActionEvent event) {
-        System.out.println("✅ ¡Botón presionado! Iniciando simulación...");
+        System.out.println("¡Botón presionado! Iniciando simulación...");
         statusLabel.setText("Status: Running Audit... Check Console.");
 
     }
@@ -45,6 +45,6 @@ public class AuditController {
     // Initialization Method
     @FXML
     public void initialize() {
-        System.out.println("📱 Interfaz Gráfica cargada y lista.");
+        System.out.println("Interfaz Gráfica cargada y lista.");
     }
 }

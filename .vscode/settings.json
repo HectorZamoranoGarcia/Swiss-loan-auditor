@@ -1,12 +1,12 @@
 {
-    // ========== MIS CONFIGURACIONES ==========
+    //MY SETTINGS
     "workbench.colorTheme": "Default High Contrast",
     "r.rterm.windows": "C:/Program Files/R/R-4.5.1/bin/R.exe",
     "r.rpath": "C:/Program Files/R/R-4.5.1/bin/R.exe",
     "r.lsp.path": "C:/Program Files/R/R-4.5.1/bin/R.exe",
     "r.plot.useHttpgd": false,
     "security.workspace.trust.untrustedFiles": "open",
-    // ========== CONFIGURACIÓN DE IA ==========
+    //AI CONFIGURATION
     "github.copilot.enable": {
         "*": true,
         "plaintext": true,
@@ -15,14 +15,14 @@
     },
     "github.copilot.editor.enableAutoCompletions": true,
     "github.copilot.inlineSuggest.enable": true,
-    // ========== RENDIMIENTO ==========
+    //PERFORMANCE
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 1000,
     "editor.minimap.enabled": false,
     "editor.smoothScrolling": true,
     "editor.cursorBlinking": "smooth",
     "editor.cursorSmoothCaretAnimation": "on",
-    // ========== IA Y AUTOCOMPLETADO ==========
+    //AI AND AUTOCOMPLETE
     "editor.inlineSuggest.enabled": true,
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "editor.quickSuggestions": {
@@ -32,7 +32,7 @@
     },
     "editor.suggestOnTriggerCharacters": true,
     "editor.acceptSuggestionOnCommitCharacter": true,
-    // ========== APARIENCIA DEL EDITOR ==========
+    //EDITOR APPEARANCE
     "editor.fontSize": 14,
     "editor.fontFamily": "'Cascadia Code', 'Fira Code', Consolas, 'Courier New', monospace",
     "editor.fontLigatures": true,
@@ -45,17 +45,17 @@
     "editor.renderWhitespace": "boundary",
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": true,
-    // ========== INTERFAZ ==========
+    //INTERFACE
     "workbench.iconTheme": "vscode-icons",
     "workbench.startupEditor": "newUntitledFile",
     "workbench.productIconTheme": "fluent-icons",
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.secondarySideBar.defaultVisibility": "hidden",
-    // ========== TERMINAL ==========
+    //TERMINAL
     "terminal.integrated.fontSize": 13,
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.defaultProfile.windows": "PowerShell",
-    // ========== ARCHIVOS Y CARPETAS ==========
+    //FILES AND FOLDERS
     "files.exclude": {
         "**/node_modules": true,
         "**/.git": true,
@@ -77,15 +77,15 @@
     "explorer.confirmDelete": false,
     "explorer.compactFolders": false,
     "explorer.confirmDragAndDrop": false,
-    // ========== FORMATEO ==========
+    //FORMATTING
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
     "editor.formatOnType": false,
-    // ========== MEMORIA Y RENDIMIENTO ==========
+    //MEMORY AND PERFORMANCE
     "typescript.tsserver.maxTsServerMemory": 4096,
     "javascript.suggest.autoImports": true,
     "typescript.suggest.autoImports": true,
-    // ========== CONFIGURACIÓN ESPECÍFICA PARA R ==========
+    //SPECIFIC CONFIGURATION FOR R
     "r.sessionWatcher": true,
     "r.bracketedPaste": true,
     "r.alwaysUseActiveTerminal": true,
@@ -94,7 +94,7 @@
         "--no-save",
         "--no-restore"
     ],
-    // ========== TABULACIÓN INTELIGENTE ==========
+    //SMART TABULATION
     "editor.autoIndent": "full",
     "editor.smartIndent": true,
     "editor.trimAutoWhitespace": true,
@@ -105,7 +105,7 @@
     "editor.autoClosingQuotes": "always",
     "editor.autoClosingDelete": "always",
     "editor.autoClosingOvertype": "always",
-    // ========== CONFIGURACIÓN JUPYTER/PYTHON ==========
+    //JUPYTER/PYTHON CONFIGURATION
     "jupyter.jupyterServerType": "local",
     "jupyter.askForKernelRestart": false,
     "jupyter.enableNativeInteractiveWindow": true,
@@ -117,14 +117,14 @@
     "python.analysis.autoImportCompletions": true,
     "python.analysis.typeCheckingMode": "basic",
     "python.terminal.activateEnvironment": false,
-    // ========== CONFIGURACIÓN JAVA & JAVAFX ==========
+    //JAVA & JAVAFX CONFIGURATION
     "java.compile.nullAnalysis.mode": "automatic",
     "java.configuration.updateBuildConfiguration": "automatic",
-    // RUTA DE SCENE BUILDER (Asegúrate de que esta es correcta para tu PC)
+    //SCENE BUILDER ROUTE
     "java.javafx.sceneBuilder.executable": "C:\\Users\\hecto\\AppData\\Local\\SceneBuilder\\SceneBuilder.exe",
-    // ========== CONFIGURACIÓN SQL ==========
+    //SQL CONFIGURATION
     "sql-formatter.uppercase": true,
-    "sqltools.useNodeRuntime": false, // <--- ESTO ARREGLA EL ERROR AMARILLO
+    "sqltools.useNodeRuntime": false,
     "database-client.autoSync": true,
     "mssql.connectionGroups": [
         {
@@ -132,7 +132,7 @@
             "id": "5B2CC068-73D9-4A16-B93E-EB6BF1B85A52"
         }
     ],
-    // ========== ASOCIACIONES DE ARCHIVOS ==========
+    //ARCHIVE ASSOCIATIONS
     "files.associations": {
         "*.rmd": "rmd",
         "*.rdata": "r",
@@ -142,7 +142,7 @@
         "*.java": "java",
         "*.ipynb": "jupyter"
     },
-    // ========== CONFIGURACIÓN POR LENGUAJE ==========
+    //LANGUAGE CONFIGURATION
     "[python]": {
         "editor.tabSize": 4,
         "editor.insertSpaces": true,
@@ -174,7 +174,7 @@
         "editor.tabSize": 2,
         "editor.defaultIndentSize": 2
     },
-    // ========== COLORES PERSONALIZADOS BRACKETS ==========
+    //CUSTOM COLORED BRACKETS
     "workbench.colorCustomizations": {
         "editorBracketHighlight.foreground1": "#ffd700",
         "editorBracketHighlight.foreground2": "#da70d6",
