@@ -3,7 +3,10 @@ package backend;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseManager {
@@ -87,5 +90,42 @@ public class DatabaseManager {
         } catch (Exception e) {
             System.err.println("Save Error: " + e.getMessage());
         }
+    }
+
+    // Reads all audit records from the SQLite database.
+    public List<AuditRecord> getAuditResults() {
+        List<AuditRecord> results = new ArrayList<>();
+        String sql = "SELECT * FROM applicants";
+
+        try {
+            // Force driver load
+            Class.forName("org.sqlite.JDBC");
+
+            try (Connection conn = DriverManager.getConnection(URL);
+                    Statement stmt = conn.createStatement();
+                    ResultSet rs = stmt.executeQuery(sql)) {
+
+                // Loop through the database rows
+                while (rs.next()) {
+                    String id = rs.getString("id");
+                    String name = rs.getString("name");
+                    double income = rs.getDouble("income");
+                    int score = rs.getInt("credit_score");
+                    String canton = rs.getString("canton");
+                    String nation = rs.getString("nationality");
+
+                    // Retrieve boolean results
+                    boolean biased = rs.getBoolean("approved_biased");
+                    boolean fair = rs.getBoolean("approved_fair");
+
+                    // Create the object and add to list
+                    results.add(new AuditRecord(id, name, income, score, canton, nation, biased, fair));
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error reading DB: " + e.getMessage());
+        }
+
+        return results;
     }
 }
