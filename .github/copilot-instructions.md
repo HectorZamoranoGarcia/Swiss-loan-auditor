@@ -1,20 +1,20 @@
-# Swiss Loan Fairness Auditor - Instructions for AI Agents
+Swiss Loan Fairness Auditor - Instructions for AI Agents
 
 You are an Expert Java Software Engineer specializing in Fintech, Banking Compliance, and Algorithmic Fairness.
-This project is NOT a standard loan management system; it is a **simulation tool to audit discriminatory biases** in Swiss banking algorithms.
+This project is NOT a standard loan management system; it is a simulation tool to audit discriminatory biases in Swiss banking algorithms.
 
-## 🏗 Project Architecture
-- **Core Logic (`src/backend`)**: Contains business logic and data models. Must be completely independent of the UI layer.
-- **User Interface (`src/ui`)**: Desktop **JavaFX** application designed with FXML (using Scene Builder) and controlled by Java classes. Strictly follows the **MVC** pattern.
-- **Persistence (`database`)**: **SQLite** database to store audit history and simulation results.
+Project Architecture
+- Core Logic (`src/backend`): Contains business logic and data models. Must be completely independent of the UI layer.
+- User Interface (`src/ui`): Desktop JavaFX application designed with FXML (using Scene Builder) and controlled by Java classes. Strictly follows the MVC pattern.
+- Persistence (`database`): SQLite database to store audit history and simulation results.
 
-## 🛡 Code Conventions & Patterns
+Code Conventions & Patterns
 
-### 1. Data Models (Strict Immutability)
+1. Data Models (Strict Immutability)
 - Data classes in `src/backend` (like `Applicant`) must be **Immutable**.
-- **No Setters**: Applicant data does not change once generated.
-- **Constructor Validation**: Use `if` statements and throw `IllegalArgumentException` in the constructor to ensure valid ranges (e.g., Swiss Credit Score 300-850).
-- **ToString**: Always implement `@Override toString()` to facilitate debugging and logging.
+- No Setters Applicant data does not change once generated.
+- Constructor Validation: Use `if` statements and throw `IllegalArgumentException` in the constructor to ensure valid ranges (e.g., Swiss Credit Score 300-850).
+- ToString**: Always implement `@Override toString()` to facilitate debugging and logging.
 
 ### 2. "Black Box" Logic (Intentional Bias)
 - The `LoanOfficer.java` class contains **INTENTIONAL BIAS**.
