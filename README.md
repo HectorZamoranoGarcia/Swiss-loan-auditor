@@ -23,17 +23,11 @@ The system moves away from static datasets. Instead, it features a custom **Synt
 
 * **Financial Data:**
   * *Income:* Randomized gaussian distribution centered around typical Swiss salaries (80k–120k CHF).
-
-[Image of Gaussian distribution graph]
-
-    * *Credit Score:* Modeled on standard scoring systems (300–850 range).
+  * *Credit Score:* Modeled on standard scoring systems (300–850 range).
 
 * **Demographic Data:**
   * *Cantons:* Zurich (ZH), Geneva (GE), Bern (BE), Ticino (TI).
-
-[Image of map of Switzerland highlighting cantons]
-
-    * *Nationality:* Weighted split between Swiss Nationals, EU Permit Holders (B/C), and Third-Country Nationals.
+  * *Nationality:* Weighted split between Swiss Nationals, EU Permit Holders (B/C), and Third-Country Nationals.
 
 ## Methodology
 
