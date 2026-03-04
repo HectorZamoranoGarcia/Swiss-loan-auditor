@@ -2,6 +2,13 @@
 
 **Algorithmic auditing tool for the Swiss Fintech sector. Built with Java + JavaFX, featuring SQLite persistence and real-time statistical analysis.**
 
+![Java 24](https://img.shields.io/badge/Java-v24-007396?style=for-the-badge&logo=java&logoColor=white)
+![JavaFX 24](https://img.shields.io/badge/JavaFX-v24-FF0000?style=for-the-badge&logo=oracle&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-Latest-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
+![MVC Pattern](https://img.shields.io/badge/Pattern-MVC-green?style=for-the-badge)
+![JDBC Batch](https://img.shields.io/badge/JDBC-Batch--Processing-orange?style=for-the-badge&logo=oracle&logoColor=white)
+![VS Code](https://img.shields.io/badge/VS%20Code-Integrated-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+
 ## Project Overview
 
 This software simulates a compliance and auditing environment tailored for a Swiss financial institution. With AI and automated decision-making systems becoming the standard in banking, the risk of hidden algorithmic bias is a growing concern.
