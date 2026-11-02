@@ -11,23 +11,28 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    // JavaFX entry point: Loads the graphical interface
+    // Start the JavaFX window
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         new ui.AuditController();
 
-        // 1. Locate the FXML file
+        // Find the FXML view
+
         File fxmlFile = new File("src/ui/AuditView.fxml");
         URL fxmlUrl = fxmlFile.toURI().toURL();
 
-        // 2. Create the FXMLLoader
+        // Create the loader
+
         FXMLLoader loader = new FXMLLoader(fxmlUrl);
 
-        // 3. Set the class loader
+        // Set the class loader
+
         loader.setClassLoader(getClass().getClassLoader());
 
-        // 4. Load the FXML and get the root node
+        // Load the view
+
         Parent root = loader.load();
 
         primaryStage.setTitle("Swiss Loan Fairness Auditor");
@@ -38,25 +43,30 @@ public class Main extends Application {
     public static void main(String[] args) {
         System.out.println("Swiss Loan Auditor System Initialized.");
 
-        // Initialize components
+        // Create services
+
         DatabaseManager dbManager = new DatabaseManager();
         LoanOfficer biasedOfficer = new LoanOfficer();
         FairLoanOfficer fairOfficer = new FairLoanOfficer();
         DataGenerator generator = new DataGenerator();
 
-        // Initialize database
+        // Set up the database
+
         dbManager.initializeDatabase();
 
-        // Generate synthetic applicant data
+        // Generate demo applicants
+
         List<Applicant> applicants = generator.generateApplicants(1000);
 
-        // Save audit results to the database
+        // Save audit results
+
         System.out.println("Running 1000 evaluations and saving results...");
         dbManager.saveAuditResults(applicants, biasedOfficer, fairOfficer);
 
         System.out.println("Audit process completed. Results stored in database/audit_records.db");
 
-        // Start the JavaFX application lifecycle
+        // Launch JavaFX
+
         launch(args);
     }
 }

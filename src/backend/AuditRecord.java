@@ -23,6 +23,7 @@ public class AuditRecord {
   }
 
   // Getters
+
   public String getId() {
     return id;
   }
@@ -47,7 +48,8 @@ public class AuditRecord {
     return nationality;
   }
 
-  // Para las columnas de resultado
+  // Approval result
+
   public String getBiasedResult() {
     if (isBiasedApproved == true) {
       return "Approved";

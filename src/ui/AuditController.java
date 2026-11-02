@@ -18,24 +18,28 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class AuditController {
 
-    // Database Manager Instance
+    // Database
+
     private DatabaseManager dbManager = new DatabaseManager();
 
-    // Interface Elements
-    @FXML
-    private TableView<AuditRecord> auditTable; // Table
-    @FXML
-    private Button btnRunAudit; // Red Button
-    @FXML
-    private Label statusLabel; // State text
+    // UI controls
 
-    // Charts Elements
+    @FXML
+    private TableView<AuditRecord> auditTable; // Results table
+    @FXML
+    private Button btnRunAudit; // Run button
+    @FXML
+    private Label statusLabel; // Status
+
+    // Charts
+
     @FXML
     private PieChart biasedPieChart;
     @FXML
     private PieChart fairPieChart;
 
-    // Table Columns
+    // Table columns
+
     @FXML
     private TableColumn<AuditRecord, String> colId;
     @FXML
@@ -51,10 +55,12 @@ public class AuditController {
     @FXML
     private TableColumn<AuditRecord, String> colFair;
 
-    // Initialization Method
+    // Set up the table
+
     @FXML
     public void initialize() {
-        // Map data properties to columns
+        // Connect model values to columns
+
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colIncome.setCellValueFactory(new PropertyValueFactory<>("income"));
@@ -63,8 +69,8 @@ public class AuditController {
         colBiased.setCellValueFactory(new PropertyValueFactory<>("biasedResult"));
         colFair.setCellValueFactory(new PropertyValueFactory<>("fairResult"));
 
-        // Custom Cell Factory: Format Income as Currency (CHF)
-        // Lógica "inline" que funcionaba correctamente
+        // Format income in CHF
+
         colIncome.setCellFactory(tc -> new TableCell<AuditRecord, Double>() {
             @Override
             protected void updateItem(Double item, boolean empty) {
@@ -72,7 +78,8 @@ public class AuditController {
                 if (empty || item == null) {
                     setText(null);
                 } else {
-                    // Format: Thousands separator + 2 decimals
+                    // Show two decimals
+
                     setText(String.format("%,.2f CHF", item));
                 }
             }
@@ -81,21 +88,25 @@ public class AuditController {
         System.out.println("UI Controller initialized. Column mapping & Formatting done.");
     }
 
-    // Button Action Handler
+    // Run the audit
+
     @FXML
     void handleRunAudit(ActionEvent event) {
         statusLabel.setText("Status: Fetching data from SQLite...");
 
         try {
-            // Fetch data from the database
+            // Load saved results
+
             List<AuditRecord> records = dbManager.getAuditResults();
 
             ObservableList<AuditRecord> dataForTable = FXCollections.observableArrayList(records);
 
-            // Populate the table
+            // Update the table
+
             auditTable.setItems(dataForTable);
 
-            // Statistics
+            // Update the charts
+
             updateCharts(records);
 
             statusLabel.setText("Status: Audit Complete. Loaded " + records.size() + " records.");
@@ -107,12 +118,14 @@ public class AuditController {
         }
     }
 
-    // Helper method to calculate statistics
+    // Count approvals for each model
+
     private void updateCharts(List<AuditRecord> records) {
         int biasedApproved = 0;
         int fairApproved = 0;
 
         // Count approvals
+
         for (AuditRecord r : records) {
             if (r.getBiasedResult().contains("Approved")) {
                 biasedApproved++;
@@ -126,13 +139,15 @@ public class AuditController {
         int biasedRejected = total - biasedApproved;
         int fairRejected = total - fairApproved;
 
-        // Populate Biased Chart data
+        // Fill the biased chart
+
         ObservableList<PieChart.Data> biasedData = FXCollections.observableArrayList(
                 new PieChart.Data("Approved (" + biasedApproved + ")", biasedApproved),
                 new PieChart.Data("Rejected (" + biasedRejected + ")", biasedRejected));
         biasedPieChart.setData(biasedData);
 
-        // Populate Fair Chart data
+        // Fill the reference chart
+
         ObservableList<PieChart.Data> fairData = FXCollections.observableArrayList(
                 new PieChart.Data("Approved (" + fairApproved + ")", fairApproved),
                 new PieChart.Data("Rejected (" + fairRejected + ")", fairRejected));

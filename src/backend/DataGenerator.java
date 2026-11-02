@@ -16,13 +16,14 @@ public class DataGenerator {
     private final Random random = new Random();
 
     public List<Applicant> generateApplicants(int count) {
-        List<Applicant> list = new ArrayList<>(); // List to hold generated applicants
+        List<Applicant> list = new ArrayList<>(); // Generated applicants
 
         for (int i = 0; i < count; i++) {
             String id = "ID:" + (2024000 + i);
             String name = "Applicant " + (i + 1);
 
-            // Income: 40k to 140k CHF
+            // Income from 40k to 140k CHF
+
             double income = 40000 + (random.nextDouble() * 100000);
             int creditScore = 300 + random.nextInt(551);
 

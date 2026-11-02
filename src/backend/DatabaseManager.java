@@ -11,15 +11,14 @@ import java.util.List;
 
 public class DatabaseManager {
 
-    // URL points to the database file inside the 'database/' folder
+    // Database file path
+
     private static final String URL = "jdbc:sqlite:database/audit_records.db";
 
-    /**
-     * Initializes the database and creates the table if it does not exist.
-     * The table stores both the applicant's profile and the audit result.
-     */
+    /** Create the audit table if needed */
     public void initializeDatabase() {
-        // SQL to create the 'applicants' table
+        // Create the applicants table
+
         String sql = "CREATE TABLE IF NOT EXISTS applicants (" +
                 "id TEXT PRIMARY KEY, " +
                 "name TEXT NOT NULL, " +
@@ -28,8 +27,8 @@ public class DatabaseManager {
                 "canton TEXT, " +
                 "nationality TEXT, " +
                 "age INTEGER, " +
-                "approved_biased BOOLEAN, " + // Column for the Biased Officer
-                "approved_fair BOOLEAN)"; // Column for the Fair Officer
+                "approved_biased BOOLEAN, " + // Biased approval
+                "approved_fair BOOLEAN)"; // Reference approval
 
         try {
             Class.forName("org.sqlite.JDBC");
@@ -45,10 +44,12 @@ public class DatabaseManager {
         }
     }
 
-    // Saves a list of applicants and the result of their evaluation.
+    // Save applicant results
+
     public void saveAuditResults(List<Applicant> applicants, LoanOfficer officer, FairLoanOfficer fairOfficer) {
 
-        // Inserting audit results
+        // Insert audit results
+
         String sql = "INSERT INTO applicants(id, name, income, credit_score, canton, nationality, age, approved_biased, approved_fair) VALUES(?,?,?,?,?,?,?,?,?)";
 
         try {
@@ -57,18 +58,22 @@ public class DatabaseManager {
             try (Connection conn = DriverManager.getConnection(URL);
                     PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-                // Disable auto commit to speed up the process
+                // Disable auto-commit
+
                 conn.setAutoCommit(false);
 
-                // Traditional FOR loop structure
-                for (int i = 0; i < applicants.size(); i++) {
-                    Applicant app = applicants.get(i); // Create 'app' variable by manual retrieval
+                // Evaluate each applicant
 
-                    // Evaluate with both officers
+                for (int i = 0; i < applicants.size(); i++) {
+                    Applicant app = applicants.get(i); // Current applicant
+
+                    // Run both rule sets
+
                     boolean isApprovedBiased = officer.evaluateLoan(app);
                     boolean isApprovedFair = fairOfficer.evaluateLoan(app);
 
-                    // Setting parameters for the PreparedStatement
+                    // Set the statement values
+
                     pstmt.setString(1, "ID:" + System.currentTimeMillis() + "-" + app.getName().hashCode());
                     pstmt.setString(2, app.getName());
                     pstmt.setDouble(3, app.getIncome());
@@ -77,13 +82,13 @@ public class DatabaseManager {
                     pstmt.setString(6, app.getNationality());
                     pstmt.setInt(7, app.getAge());
                     pstmt.setBoolean(8, isApprovedBiased); // Biased result
-                    pstmt.setBoolean(9, isApprovedFair); // Fair result
+                    pstmt.setBoolean(9, isApprovedFair); // Reference result
 
-                    pstmt.addBatch(); // Add to batch
+                    pstmt.addBatch(); // Add row to batch
                 }
 
-                pstmt.executeBatch(); // Send the entire batch
-                conn.commit(); // Commit changes
+                pstmt.executeBatch(); // Insert all rows
+                conn.commit(); // Save changes
                 System.out.println("Saved " + applicants.size() + " audit records to SQLite.");
             }
 
@@ -92,20 +97,23 @@ public class DatabaseManager {
         }
     }
 
-    // Reads all audit records from the SQLite database.
+    // Load audit records
+
     public List<AuditRecord> getAuditResults() {
         List<AuditRecord> results = new ArrayList<>();
         String sql = "SELECT * FROM applicants";
 
         try {
-            // Force driver load
+            // Load the SQLite driver
+
             Class.forName("org.sqlite.JDBC");
 
             try (Connection conn = DriverManager.getConnection(URL);
                     Statement stmt = conn.createStatement();
                     ResultSet rs = stmt.executeQuery(sql)) {
 
-                // Loop through the database rows
+                // Read database rows
+
                 while (rs.next()) {
                     String id = rs.getString("id");
                     String name = rs.getString("name");
@@ -114,11 +122,13 @@ public class DatabaseManager {
                     String canton = rs.getString("canton");
                     String nation = rs.getString("nationality");
 
-                    // Retrieve boolean results
+                    // Read model results
+
                     boolean biased = rs.getBoolean("approved_biased");
                     boolean fair = rs.getBoolean("approved_fair");
 
-                    // Create the object and add to list
+                    // Add an audit record
+
                     results.add(new AuditRecord(id, name, income, score, canton, nation, biased, fair));
                 }
             }
